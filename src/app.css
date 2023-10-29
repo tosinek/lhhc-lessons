@@ -1,0 +1,22 @@
+:root {
+  font-family: verdana;
+  color: rgb(39, 39, 39);
+  font-size: 18px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 2rem;
+  margin: 0;
+  background-color: lightblue;
+  /* background-image: url('https://cad1c8b3b3.clvaw-cdnwnd.com/713e2de706ac8fcd9a8bed8278cbb4a6/200000095-6fe4b6fe4d/450/LHHC-2023-placka.webp?ph=cad1c8b3b3'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* backdrop-filter: blur(5px) opacity(0.5) sepia(0.5); */
+}
