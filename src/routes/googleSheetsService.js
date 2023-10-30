@@ -5,6 +5,7 @@ const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
 async function getAuthToken() {
   const auth = new google.auth.GoogleAuth({
+    credentials: JSON.parse(process.env.GCLOUD_CREDENTIALS),
     scopes: SCOPES,
   });
   const authToken = await auth.getClient();
