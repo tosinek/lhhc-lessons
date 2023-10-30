@@ -1,3 +1,5 @@
+// from https://hackernoon.com/how-to-use-google-sheets-api-with-nodejs-cz3v316f
+// credentials inspired by https://github.com/googleapis/google-api-nodejs-client/issues/2986
 import { google } from "googleapis";
 const sheets = google.sheets("v4");
 

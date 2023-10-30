@@ -1,27 +1,42 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { allCourses } from "./courses";
-  // import type { PageData } from "./$types";
-  // export let data: PageData;
+  import type { PageData } from "./$types";
+  export let data: PageData;
+
+  /**
+   * todo: logo / lhhc 2023 / grafika
+   * todo: schedule compare
+   * todo: volno na lekcich
+   * todo: waiting list WL_ prefix
+   */
 
   let loading = false;
   let userCourses = [];
   let userData = [];
-
-  export let data;
-  console.log("🚀 ~ file: +page.svelte:12 ~ email:", data);
+  let err = null;
 
   onMount(() => {
     loading = true;
     fetch(`/?email=${data.email}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log("res", res);
+        if (res.error) {
+          err = res.error;
+          return;
+        }
 
-        userData = res[0];
-        userCourses = res[0].slice(4, 18);
-        console.log(userData);
+        userData = res.data[0];
+        // console.log(res.data[0]);
 
+        userCourses = res.data[0].slice(4, 18);
+      })
+      .catch((e) => {
+        console.warn(e);
+        userData = [];
+        userCourses = [];
+      })
+      .finally(() => {
         loading = false;
       });
   });
@@ -46,12 +61,59 @@
     }
     return course;
   });
+
+  // format date as YYYYMMDDTMMHHSSZ
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const hours = date.getUTCHours().toString().padStart(2, "0");
+    const minutes = date.getUTCMinutes().toString().padStart(2, "0");
+    return `${year}${month}${day}T${hours}${minutes}00Z`;
+  };
+
+  const addToCalendar = (item, returnTitle = false) => {
+    const location = "DEPO2015, Pilsen, Czech Republic";
+    const description = item.name + " with " + item.teachers;
+
+    const title =
+      "LHHC 2023: " +
+      (item.type === "Party"
+        ? item.name
+        : item.type + (item.level ? " " + item.level : "") + " - " + item.name);
+
+    if (returnTitle) return title;
+
+    return `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+      title
+    )}&location=${encodeURIComponent(location)}&dates=${formatDate(
+      item.start
+    )}/${formatDate(item.end)}&details=${encodeURIComponent(description)}`;
+  };
 </script>
 
 <h1>Your schedule</h1>
+{#if data.email}
+  ({data.email})
+{/if}
+
 {#if loading}
-  <div>Loading....</div>
+  <p>Loading....</p>
+{:else if err}
+  <p style="color: red; font-weight: 700;">
+    {err}
+  </p>
+{:else if !userData.length}
+  <p>No data</p>
 {:else}
+  <div class="payment" class:paid={userData[22]}>
+    {#if userData[22]}
+      Your order is paid.
+    {:else}
+      Your payment hasn't been processed yet.
+    {/if}
+  </div>
+
   <div class="cards">
     {#each allCoursesWithRegistrations.filter((f) => f.registered) as timeSlot}
       <div class="card">
@@ -62,6 +124,10 @@
               {timeSlot.level}
               {timeSlot.type}
             </div>
+
+            <div class="course-type">
+              with {timeSlot.teachers}
+            </div>
           {/if}
         </div>
 
@@ -71,7 +137,13 @@
           {#if timeSlot.registered === "LEADER" || timeSlot.registered === "FOLLOWER"}
             as {timeSlot.registered}
           {/if}
-          <!-- <div class="location">location to be announced</div> -->
+          <div class="location">location to be announced</div>
+
+          <div class="calendar">
+            <a href={addToCalendar(timeSlot)} target="_blank"
+              >Add to your Google calendar</a
+            >
+          </div>
         </div>
       </div>
     {/each}
@@ -79,33 +151,40 @@
 {/if}
 
 <style>
+  h1 {
+    margin-block: 0;
+    font-size: 1.5rem;
+    justify-self: flex-start;
+  }
   .cards {
+    --border-radius: 10px;
     display: grid;
+    margin-block: 2rem;
     gap: 2rem 2rem;
-    padding: 1rem;
     grid-template-columns: minmax(200px, 450px);
   }
   .card {
-    /* border: 1px solid black; */
     background-color: rgb(253, 244, 244);
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
     display: grid;
-    border-radius: 5px;
+    border-radius: var(--border-radius, 5px);
   }
   .course,
   .info {
-    border-radius: 5px 5px 0 0;
     padding-inline: 1rem;
     padding-block: 1rem;
     text-align: center;
   }
   .course {
+    border-radius: var(--border-radius, 5px) var(--border-radius, 5px) 0 0;
     background-color: rgb(255, 190, 183);
+    background-color: aliceblue;
     font-family: monospace;
   }
   .info {
-    /* background-color: rgb(255, 237, 235); */
-    /* color: green; */
+    border-radius: 0 0 var(--border-radius, 5px) var(--border-radius, 5px);
+    background-color: rgb(43, 144, 226);
+    color: white;
   }
   .course-name {
     font-size: 1.3rem;
@@ -117,7 +196,26 @@
     font-weight: 700;
   }
   .location {
-    color: grey;
+    font-style: italic;
     margin-top: 10px;
+  }
+  .calendar {
+    margin-top: 10px;
+    font-size: 0.8em;
+  }
+  .calendar a {
+    color: white;
+  }
+  .payment {
+    margin-block: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: rgb(255, 237, 235);
+    color: red;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  }
+  .payment.paid {
+    background-color: rgb(237, 255, 235);
+    color: green;
   }
 </style>

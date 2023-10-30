@@ -16,6 +16,8 @@ export const allCourses: {
   teachers?: string;
   time: string;
   place?: string;
+  start: Date;
+  end: Date;
 }[] = [
   {
     number: "Nr. 01",
@@ -26,6 +28,8 @@ export const allCourses: {
     day: "Friday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-17T12:15+01:00"),
+    end: new Date("2023-11-17T13:45+01:00"),
   },
   {
     number: "Nr. 02",
@@ -36,6 +40,8 @@ export const allCourses: {
     day: "Friday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-17T12:15+01:00"),
+    end: new Date("2023-11-17T13:45+01:00"),
   },
   {
     number: "Nr. 03",
@@ -46,6 +52,8 @@ export const allCourses: {
     day: "Friday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-17T14:00+01:00"),
+    end: new Date("2023-11-17T15:30+01:00"),
   },
   {
     number: "Nr. 04",
@@ -55,6 +63,8 @@ export const allCourses: {
     type: "Charleston",
     day: "Friday",
     time: "14:00 - 15:30",
+    start: new Date("2023-11-17T14:00+01:00"),
+    end: new Date("2023-11-17T15:30+01:00"),
     place: undefined,
   },
   {
@@ -66,6 +76,8 @@ export const allCourses: {
     day: "Friday",
     time: "15:45 - 17:15",
     place: undefined,
+    start: new Date("2023-11-17T15:45+01:00"),
+    end: new Date("2023-11-17T17:15+01:00"),
   },
   {
     number: "Nr. 06",
@@ -76,6 +88,8 @@ export const allCourses: {
     day: "Friday",
     time: "15:45 - 17:15",
     place: undefined,
+    start: new Date("2023-11-17T15:45+01:00"),
+    end: new Date("2023-11-17T17:15+01:00"),
   },
   {
     number: "Nr. 07",
@@ -86,6 +100,8 @@ export const allCourses: {
     day: "Friday",
     time: "17:30 - 19:00",
     place: undefined,
+    start: new Date("2023-11-17T17:30+01:00"),
+    end: new Date("2023-11-17T19:00+01:00"),
   },
   {
     number: "Nr. 08",
@@ -96,6 +112,8 @@ export const allCourses: {
     day: "Friday",
     time: "17:30 - 19:00",
     place: undefined,
+    start: new Date("2023-11-17T17:30+01:00"),
+    end: new Date("2023-11-17T19:00+01:00"),
   },
   {
     name: "Friday party",
@@ -103,6 +121,8 @@ export const allCourses: {
     day: "Friday",
     time: "20:00 - 02:00",
     place: undefined,
+    start: new Date("2023-11-17T20:00+01:00"),
+    end: new Date("2023-11-18T02:00+01:00"),
   },
 
   {
@@ -114,6 +134,8 @@ export const allCourses: {
     day: "Saturday",
     time: "10:30 - 12:00",
     place: undefined,
+    start: new Date("2023-11-18T10:30+01:00"),
+    end: new Date("2023-11-18T12:00+01:00"),
   },
   {
     number: "Nr. 10",
@@ -124,6 +146,8 @@ export const allCourses: {
     day: "Saturday",
     time: "10:30 - 12:00",
     place: undefined,
+    start: new Date("2023-11-18T10:30+01:00"),
+    end: new Date("2023-11-18T12:00+01:00"),
   },
   {
     number: "Nr. 11",
@@ -134,6 +158,8 @@ export const allCourses: {
     day: "Saturday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-18T12:15+01:00"),
+    end: new Date("2023-11-18T13:45+01:00"),
   },
   {
     number: "Nr. 12",
@@ -144,6 +170,8 @@ export const allCourses: {
     day: "Saturday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-18T12:15+01:00"),
+    end: new Date("2023-11-18T13:45+01:00"),
   },
   {
     number: "Nr. 13",
@@ -154,6 +182,8 @@ export const allCourses: {
     day: "Saturday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-18T12:15+01:00"),
+    end: new Date("2023-11-18T13:45+01:00"),
   },
   {
     number: "Nr. 14",
@@ -164,6 +194,8 @@ export const allCourses: {
     day: "Saturday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-18T14:00+01:00"),
+    end: new Date("2023-11-18T15:30+01:00"),
   },
   {
     number: "Nr. 15",
@@ -174,6 +206,8 @@ export const allCourses: {
     day: "Saturday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-18T14:00+01:00"),
+    end: new Date("2023-11-18T15:30+01:00"),
   },
   {
     number: "Nr. 16",
@@ -184,6 +218,8 @@ export const allCourses: {
     day: "Saturday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-18T14:00+01:00"),
+    end: new Date("2023-11-18T15:30+01:00"),
   },
   {
     number: "Nr. 17",
@@ -194,6 +230,8 @@ export const allCourses: {
     day: "Saturday",
     time: "15:45 - 17:15",
     place: undefined,
+    start: new Date("2023-11-18T15:45+01:00"),
+    end: new Date("2023-11-18T17:15+01:00"),
   },
   {
     number: "Nr. 18",
@@ -204,6 +242,8 @@ export const allCourses: {
     day: "Saturday",
     time: "15:45 - 17:15",
     place: undefined,
+    start: new Date("2023-11-18T15:45+01:00"),
+    end: new Date("2023-11-18T17:15+01:00"),
   },
   {
     number: "Nr. 19",
@@ -214,6 +254,8 @@ export const allCourses: {
     day: "Saturday",
     time: "15:45 - 17:15",
     place: undefined,
+    start: new Date("2023-11-18T15:45+01:00"),
+    end: new Date("2023-11-18T17:15+01:00"),
   },
   {
     number: "Nr. 20",
@@ -224,6 +266,8 @@ export const allCourses: {
     day: "Saturday",
     time: "17:30 - 19:00",
     place: undefined,
+    start: new Date("2023-11-18T17:30+01:00"),
+    end: new Date("2023-11-18T19:00+01:00"),
   },
   {
     name: "Saturday party",
@@ -231,6 +275,8 @@ export const allCourses: {
     day: "Saturday",
     time: "20:00 - 02:00",
     place: undefined,
+    start: new Date("2023-11-18T20:00+01:00"),
+    end: new Date("2023-11-19T02:00+01:00"),
   },
 
   {
@@ -242,6 +288,8 @@ export const allCourses: {
     day: "Sunday",
     time: "10:30 - 12:00",
     place: undefined,
+    start: new Date("2023-11-19T10:30+01:00"),
+    end: new Date("2023-11-19T12:00+01:00"),
   },
   {
     number: "Nr. 22",
@@ -252,6 +300,8 @@ export const allCourses: {
     day: "Sunday",
     time: "10:30 - 12:00",
     place: undefined,
+    start: new Date("2023-11-19T10:30+01:00"),
+    end: new Date("2023-11-19T12:00+01:00"),
   },
   {
     number: "Nr. 23",
@@ -262,6 +312,8 @@ export const allCourses: {
     day: "Sunday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-19T12:15+01:00"),
+    end: new Date("2023-11-19T13:45+01:00"),
   },
   {
     number: "Nr. 24",
@@ -272,6 +324,8 @@ export const allCourses: {
     day: "Sunday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-19T12:15+01:00"),
+    end: new Date("2023-11-19T13:45+01:00"),
   },
   {
     number: "Nr. 25",
@@ -282,6 +336,8 @@ export const allCourses: {
     day: "Sunday",
     time: "12:15 - 13:45",
     place: undefined,
+    start: new Date("2023-11-19T12:15+01:00"),
+    end: new Date("2023-11-19T13:45+01:00"),
   },
   {
     number: "Nr. 26",
@@ -292,6 +348,8 @@ export const allCourses: {
     day: "Sunday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-19T14:00+01:00"),
+    end: new Date("2023-11-19T15:30+01:00"),
   },
   {
     number: "Nr. 27",
@@ -302,6 +360,8 @@ export const allCourses: {
     day: "Sunday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-19T14:00+01:00"),
+    end: new Date("2023-11-19T15:30+01:00"),
   },
   {
     number: "Nr. 28",
@@ -312,5 +372,7 @@ export const allCourses: {
     day: "Sunday",
     time: "14:00 - 15:30",
     place: undefined,
+    start: new Date("2023-11-19T14:00+01:00"),
+    end: new Date("2023-11-19T15:30+01:00"),
   },
 ];

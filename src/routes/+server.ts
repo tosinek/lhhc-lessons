@@ -15,10 +15,21 @@ export const GET: RequestHandler = async ({ url }) => {
       sheetName: "Odpovědi formuláře 1!B1:B400",
       auth,
     });
-    const emails = r1.data?.values?.map((m, index) => [m[0], index]);
+    const emails = r1.data?.values?.map((m, index) => [
+      m[0]?.toLowerCase(),
+      index,
+    ]);
+
     const matches = emails?.filter(
-      (f) => f[0] === url.searchParams.get("email")
+      (f) => f[0] === url.searchParams.get("email")?.toLowerCase()
     );
+    if (matches?.length > 1) {
+      return new Response(
+        JSON.stringify({
+          error: "Multiple registrations for this email. Contact Jindra.",
+        })
+      );
+    }
     if (matches?.length) {
       const line = matches[0][1] + 1;
       const r2 = await getSpreadSheetValues({
@@ -26,15 +37,12 @@ export const GET: RequestHandler = async ({ url }) => {
         sheetName: `Odpovědi formuláře 1!A${line}:Z${line}`,
         auth,
       });
-      console.log(
-        "🚀 ~ file: +page.server.ts ~ line 32 ~ load: ~ r2",
-        r2.data.values
-      );
-      // return new Response(String(random));
-      return new Response(JSON.stringify(r2.data.values));
+      return new Response(JSON.stringify({ data: r2.data.values }));
     }
-  } catch (error) {
-    return new Response("error");
-    // console.log(error.message, error.stack);
+
+    return new Response({ message: "No data" });
+  } catch (e) {
+    console.log(e.message, e.stack);
+    return new Response(JSON.stringify({ error: e?.message, stack: e?.stack }));
   }
 };
