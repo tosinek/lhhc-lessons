@@ -28,7 +28,6 @@
         }
 
         userData = res.data[0];
-        // console.log(res.data[0]);
 
         userCourses = res.data[0].slice(4, 18);
       })
@@ -43,7 +42,13 @@
   });
 
   $: allCoursesWithRegistrations = allCourses.map((course, index) => {
-    const filtered = userCourses.filter((f) => new RegExp(course.name).test(f));
+    const filtered = userCourses.filter((f) => {
+      if (course.number) {
+        return new RegExp("^" + course.number).test(f);
+      } else {
+        return false;
+      }
+    });
     if (filtered.length) {
       const parts = filtered[0].split(" ");
       course.registered = parts[parts.length - 1]; // FOLLOWER / LEADER
