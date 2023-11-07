@@ -5,10 +5,11 @@
   export let data: PageData;
 
   /**
-   * todo: logo / lhhc 2023 / grafika
-   * todo: schedule compare
-   * todo: volno na lekcich
+   * todo: fonty
    * todo: waiting list WL_ prefix
+   * todo: mista konani z prehledu
+   * todo: data o parties
+   * todo: volno na lekcich?
    */
 
   let loading = false;
@@ -116,7 +117,7 @@
     {#each allCoursesWithRegistrations.filter((f) => f.registered) as timeSlot}
       <div class="card">
         <div class="course">
-          <div class="course-name">{timeSlot.name}</div>
+          <div class="course-name">{timeSlot.number || ""} {timeSlot.name}</div>
           {#if timeSlot.type !== "Party"}
             <div class="course-type">
               {timeSlot.level}
