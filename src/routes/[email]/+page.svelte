@@ -42,12 +42,10 @@
   });
 
   $: allCoursesWithRegistrations = allCourses.map((course, index) => {
-    const filtered = userCourses.filter((f) =>
-      new RegExp(course.name.slice(0, 6)).test(f)
-    );
+    const filtered = userCourses.filter((f) => new RegExp(course.name).test(f));
     if (filtered.length) {
       const parts = filtered[0].split(" ");
-      course.registered = parts[parts.length - 1];
+      course.registered = parts[parts.length - 1]; // FOLLOWER / LEADER
     }
 
     if (course.name === "Friday party" && userCourses[4] === "Ano / Ja / Yes") {
