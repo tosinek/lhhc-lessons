@@ -44,6 +44,7 @@ export const GET: RequestHandler = async ({ url }) => {
         auth,
       });
 
+      console.log(url.searchParams.get("email"));
       return new Response(
         JSON.stringify({ data: r2.data.values, places: r3.data.values })
       );
