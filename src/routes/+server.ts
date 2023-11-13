@@ -37,7 +37,16 @@ export const GET: RequestHandler = async ({ url }) => {
         sheetName: `Odpovědi formuláře 1!A${line}:Z${line}`,
         auth,
       });
-      return new Response(JSON.stringify({ data: r2.data.values }));
+
+      const r3 = await getSpreadSheetValues({
+        spreadsheetId,
+        sheetName: `přehled!H1:H31`, // no1-28 a pak 2 party
+        auth,
+      });
+
+      return new Response(
+        JSON.stringify({ data: r2.data.values, places: r3.data.values })
+      );
     }
 
     return new Response({ message: "No data" });

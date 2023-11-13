@@ -15,6 +15,7 @@
   let loading = false;
   let userCourses = [];
   let userData = [];
+  let locations = [];
   let err = null;
 
   onMount(() => {
@@ -28,6 +29,7 @@
         }
 
         userData = res.data[0];
+        locations = res.places;
 
         userCourses = res.data[0].slice(4, 18);
       })
@@ -94,6 +96,18 @@
       item.start
     )}/${formatDate(item.end)}&details=${encodeURIComponent(description)}`;
   };
+
+  $: getLocation = (timeSlot) => {
+    const no = timeSlot.number?.match(/\d{2}/);
+    if (no) {
+      return locations[parseInt(no)];
+    } else if (timeSlot.name === "Saturday party") {
+      return locations[locations.length - 1];
+    } else if (timeSlot.name === "Friday party") {
+      return locations[locations.length - 2];
+    }
+    return "location to be announced";
+  };
 </script>
 
 <h1>Your schedule</h1>
@@ -141,7 +155,7 @@
           {#if timeSlot.registered === "LEADER" || timeSlot.registered === "FOLLOWER"}
             as {timeSlot.registered}
           {/if}
-          <div class="location">location to be announced</div>
+          <div class="location">@{getLocation(timeSlot)}</div>
 
           <div class="calendar">
             <a href={addToCalendar(timeSlot)} target="_blank"
@@ -200,7 +214,6 @@
     font-weight: 700;
   }
   .location {
-    font-style: italic;
     margin-top: 10px;
   }
   .calendar {
