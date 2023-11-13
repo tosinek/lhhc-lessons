@@ -6,10 +6,11 @@
 
   /**
    * todo: fonty
-   * todo: waiting list WL_ prefix
-   * todo: mista konani z prehledu
-   * todo: data o parties
-   * todo: volno na lekcich?
+   * todo: vyzkouset si WL registraci ze se nezobrazi
+   * todo: razeni probehly lekci (next vs past)
+   * todo upsell volno na lekcich
+   * todo zrusene registrace
+   * todo registrace vice lidi na jeden email
    */
 
   let loading = false;
@@ -142,11 +143,10 @@
               {timeSlot.level}
               {timeSlot.type}
             </div>
-
-            <div class="course-type">
-              with {timeSlot.teachers}
-            </div>
           {/if}
+          <div class="course-type">
+            with {timeSlot.teachers}
+          </div>
         </div>
 
         <div class="info">
