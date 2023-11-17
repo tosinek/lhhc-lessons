@@ -122,8 +122,8 @@ export const allCourses: {
     teachers: "The Splanky 6",
     time: "19:00 - 02:00",
     place: undefined,
-    start: new Date("2023-11-17T19:00+01:00"),
-    end: new Date("2023-11-18T02:00+01:00"),
+    start: new Date("2023-11-17T20:00+01:00"),
+    end: new Date("2023-11-18T01:00+01:00"),
   },
 
   {
@@ -278,7 +278,7 @@ export const allCourses: {
     time: "20:00 - 02:00",
     place: undefined,
     start: new Date("2023-11-18T20:00+01:00"),
-    end: new Date("2023-11-19T02:00+01:00"),
+    end: new Date("2023-11-19T01:30+01:00"),
   },
 
   {
