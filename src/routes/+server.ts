@@ -44,9 +44,19 @@ export const GET: RequestHandler = async ({ url }) => {
         auth,
       });
 
+      const r4 = await getSpreadSheetValues({
+        spreadsheetId,
+        sheetName: `Program party!B1:K2`,
+        auth,
+      });
+
       console.log(url.searchParams.get("email"));
       return new Response(
-        JSON.stringify({ data: r2.data.values, places: r3.data.values })
+        JSON.stringify({
+          data: r2.data.values,
+          places: r3.data.values,
+          party: r4.data.values,
+        })
       );
     }
 

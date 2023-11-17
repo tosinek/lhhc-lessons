@@ -17,6 +17,7 @@
   let userCourses = [];
   let userData = [];
   let locations = [];
+  let partyProgram = [[], []];
   let err = null;
 
   onMount(() => {
@@ -31,6 +32,7 @@
 
         userData = res.data[0];
         locations = res.places;
+        partyProgram = res.party;
 
         userCourses = res.data[0].slice(4, 18);
       })
@@ -147,6 +149,22 @@
           <div class="course-type">
             with {timeSlot.teachers}
           </div>
+
+          {#if timeSlot.type === "Party"}
+            <div class="course-type" style="margin-top: 10px;">
+              <b>Program:</b> <br />
+              {#if timeSlot.day === "Friday"}
+                {#each partyProgram[0] as i}
+                  {i}<br />
+                {/each}
+              {/if}
+              {#if timeSlot.day === "Saturday"}
+                {#each partyProgram[1] as i}
+                  {i}<br />
+                {/each}
+              {/if}
+            </div>
+          {/if}
         </div>
 
         <div class="info">
