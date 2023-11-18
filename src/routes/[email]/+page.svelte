@@ -108,6 +108,10 @@
       Your payment hasn't been processed yet.
     {/if}
   </div>
+
+  <div class="feedback">
+    For feedback, send us an <a href="mailto:tosinek@gmail.com">email</a>.
+  </div>
 {/if}
 
 <style>
@@ -126,6 +130,10 @@
   .email {
     color: rgba(0, 0, 0, 0.7);
     text-align: center;
+  }
+  .feedback {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
   }
   .cards {
     --border-radius: 10px;
