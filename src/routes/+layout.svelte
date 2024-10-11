@@ -4,7 +4,7 @@
 
 <div class="page">
   <div class="nav-bg" />
-  <div class="nav">LHHC 2023</div>
+  <div class="nav">LHHC 2024</div>
   <div class="content">
     <slot />
   </div>
