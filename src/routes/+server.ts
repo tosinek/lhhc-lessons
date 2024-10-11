@@ -6,13 +6,14 @@ import {
   getSpreadSheetValues,
 } from "./googleSheetsService.js";
 
+const sheetName = "2024 form";
 const spreadsheetId = "1Hd_edu1c_6J_KkMzW3hrQpLKKVqPWKO-LMo6H9C8RgY";
 export const GET: RequestHandler = async ({ url }) => {
   try {
     const auth = await getAuthToken();
     const r1 = await getSpreadSheetValues({
       spreadsheetId,
-      sheetName: "Odpovědi formuláře 1!B1:B400",
+      sheetName: sheetName + "!B1:B400",
       auth,
     });
     const emails = r1.data?.values?.map((m, index) => [
@@ -34,7 +35,7 @@ export const GET: RequestHandler = async ({ url }) => {
       const line = matches[0][1] + 1;
       const r2 = await getSpreadSheetValues({
         spreadsheetId,
-        sheetName: `Odpovědi formuláře 1!A${line}:Z${line}`,
+        sheetName: `${sheetName}!A${line}:Z${line}`,
         auth,
       });
 

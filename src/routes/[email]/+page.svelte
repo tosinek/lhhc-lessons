@@ -60,12 +60,12 @@
       course.registered = parts[parts.length - 1]; // FOLLOWER / LEADER
     }
 
-    if (course.name === "Friday party" && userCourses[4] === "Ano / Ja / Yes") {
+    if (course.name === "Friday party" && userCourses[2] === "Ano / Ja / Yes") {
       course.registered = "COMING";
     }
     if (
       course.name === "Saturday party" &&
-      userCourses[10] === "Ano / Ja / Yes"
+      userCourses[8] === "Ano / Ja / Yes"
     ) {
       course.registered = "COMING";
     }
@@ -87,20 +87,6 @@
 {:else if !userData.length}
   <p>No data</p>
 {:else}
-  <h2>Upcoming events:</h2>
-  <div class="cards">
-    {#each allCoursesWithRegistrations.filter((f) => f.registered && f.end.getTime() > Date.now()) as timeSlot}
-      <CourseCard {timeSlot} {partyProgram} {locations} />
-    {/each}
-  </div>
-
-  <h2>Past events:</h2>
-  <div class="cards">
-    {#each allCoursesWithRegistrations.filter((f) => f.registered && f.end.getTime() <= Date.now()) as timeSlot}
-      <CourseCard {timeSlot} {partyProgram} {locations} />
-    {/each}
-  </div>
-
   <div class="payment" class:paid={userData[22]}>
     {#if userData[22]}
       Your order is paid.
@@ -108,6 +94,20 @@
       Your payment hasn't been processed yet.
     {/if}
   </div>
+
+  <!-- <h2>Upcoming events:</h2> -->
+  <div class="cards">
+    {#each allCoursesWithRegistrations.filter((f) => f.registered && f.end.getTime() > Date.now()) as timeSlot}
+      <CourseCard {timeSlot} {partyProgram} {locations} />
+    {/each}
+  </div>
+
+  <!-- <h2>Past events:</h2>
+  <div class="cards">
+    {#each allCoursesWithRegistrations.filter((f) => f.registered && f.end.getTime() <= Date.now()) as timeSlot}
+      <CourseCard {timeSlot} {partyProgram} {locations} />
+    {/each}
+  </div> -->
 
   <div class="feedback">
     For feedback, send us an <a href="mailto:tosinek@gmail.com">email</a>.

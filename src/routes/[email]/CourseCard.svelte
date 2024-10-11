@@ -16,11 +16,11 @@
   };
 
   const addToCalendar = (item, returnTitle = false) => {
-    const location = "DEPO2015, Pilsen, Czech Republic";
+    const location = item.place || "Kulturní dům JAS, Pilsen, Czech Republic";
     const description = item.name + " with " + item.teachers;
 
     const title =
-      "LHHC 2023: " +
+      "LHHC 2024: " +
       (item.type === "Party"
         ? item.name
         : item.type + (item.level ? " " + item.level : "") + " - " + item.name);
@@ -61,7 +61,8 @@
     {#if timeSlot.type === "Party"}
       <div class="course-type" style="margin-top: 10px;">
         <b>Program:</b> <br />
-        {#if timeSlot.day === "Friday"}
+        <div>To be announced, check later</div>
+        <!-- {#if timeSlot.day === "Friday"}
           {#each partyProgram[0] as i}
             {i}<br />
           {/each}
@@ -70,7 +71,7 @@
           {#each partyProgram[1] as i}
             {i}<br />
           {/each}
-        {/if}
+        {/if} -->
       </div>
     {/if}
   </div>
@@ -81,7 +82,7 @@
     {#if timeSlot.registered === "LEADER" || timeSlot.registered === "FOLLOWER"}
       as {timeSlot.registered}
     {/if}
-    <div class="location">@{getLocation(timeSlot)}</div>
+    <!-- <div class="location">@{getLocation(timeSlot)}</div> -->
 
     <div class="calendar">
       <a href={addToCalendar(timeSlot)} target="_blank"
