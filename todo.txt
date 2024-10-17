@@ -1,0 +1,28 @@
+badge za to kolikaty festival maji, nebo kolikatou lekci
+obsahuje program, jidlo a party a zaplaceno
+logovat pouziti nekam jinam nez do logu 
+automaticky email
+
+registrace 
+filtrovani 
+upcoming vs past 
+move footer to end of page 
+skok pri zobrazeni modalu 
+madeup email zobrazi error 500
+followers last spots vyhodi zaskrtavatko pryc 
+animovat zmeny v layoutu 
+double zobrazeni "friday" pokud ma registrovano neco z prvniho bloku daneho dne 
+delete courseCard a server side get 
+
+
+Valentyn:
+Já jsem vizuální typ, takže klidně nějaké grafické zobrazení, a zvýrazněné moje lekce. Taky by bylo fajn oddělit barevné různé dny. A pro mě informace lekce, je kdy, a kdo to učí, tanec a level, název té lekce pro mě není podstatný, a podle toho bych upravil velikost textu. Co dalšího by bylo zajímavý, celková účast a poměr zúčastněných.
+Ty dny oddělit jsou dobrý nápad.
+A asi se mi líbí i to, co je to za tanec spíš než název lekce.
+Ještě tam přibyde zase číslo sálu. Ale to se ještě neví.
+A taky pro lidi co si objednali jídlo, tak to tma snad bude taky.
+Obsazenost lekce by tam šla přidat. Ale to musím probrat s Jindrou, jestli je s tím ok.
+Jo přesně jak říkáš, ta grafika rozvrhu s lekcemia třeba černobílé všechno, a barevné jen ty moje. Kdyby to bylo i dynamický, bylo by to fajn, jakože mít dvě zobrazení, grafiku, nebo takhle ty karty.
+
+
+

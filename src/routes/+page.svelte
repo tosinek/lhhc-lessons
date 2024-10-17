@@ -1,7 +1,7 @@
 <script lang="ts">
   let email = "";
   const redirect = () => {
-    window.location = "/" + email;
+    if (typeof window !== "undefined") window.location = "/" + email;
   };
 </script>
 
@@ -15,18 +15,18 @@
     placeholder="@"
     autofocus
   />
-  <div>
-    <button on:click={redirect}>Show my lessons</button>
-  </div>
+  <button on:click={redirect}>Show my lessons</button>
 </form>
 
 <style>
   form {
     display: grid;
     gap: 10px;
+    justify-items: center;
   }
   input {
     width: 100%;
+    max-width: 500px;
     font-size: 1.2rem;
     padding: 10px;
     font-family: Verdana;
@@ -34,19 +34,5 @@
   }
   label {
     text-align: center;
-  }
-  div:has(button) {
-    display: flex;
-    justify-content: center;
-  }
-  button {
-    font-size: 1rem;
-    padding: 10px;
-    font-family: Verdana;
-    border-radius: 5px;
-    background-color: rgb(43, 144, 226);
-    color: white;
-    border: none;
-    cursor: pointer;
   }
 </style>
