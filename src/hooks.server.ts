@@ -11,6 +11,7 @@ import {
   getSpreadSheetValues,
 } from "./routes/googleSheetsService.js";
 
+let lastUpdate = 0;
 let registrationData = [];
 export let courseData = [];
 export let partyData = [];
@@ -23,18 +24,32 @@ export const ownData = (email: string) => {
 const sheetName = "2024 form";
 const spreadsheetId = "1Hd_edu1c_6J_KkMzW3hrQpLKKVqPWKO-LMo6H9C8RgY";
 const dataRefresh = async () => {
+  if (Date.now() - lastUpdate < 60 * 1000) {
+    console.log(
+      "GS: data already refreshed",
+      (Date.now() - lastUpdate) / 1000,
+      "s ago"
+    );
+    return;
+  }
+  lastUpdate = Date.now();
+
   try {
     const startTimestamp = Date.now();
+    console.log("GS: getting auth token");
+
     const auth = await getAuthToken();
+    console.log(
+      "GS: token",
+      auth?.email,
+      "in (ms)",
+      Date.now() - startTimestamp
+    );
     const dataEmails = await getSpreadSheetValues({
       spreadsheetId,
       sheetName: sheetName + "!A1:Z400",
       auth,
     });
-    // const emails = dataEmails.data?.values?.map((m, index) => [
-    //   m[0]?.toLowerCase(),
-    //   index,
-    // ]);
 
     const courseSheet = await getSpreadSheetValues({
       spreadsheetId,
@@ -57,11 +72,13 @@ const dataRefresh = async () => {
     registrationData = dataEmails.data?.values;
     courseData = courseSheet.data?.values;
 
-    console.log("data refreshed in", Date.now() - startTimestamp, "ms");
+    console.log(
+      "GS: data refreshed in",
+      (Date.now() - startTimestamp) / 1000,
+      "s"
+    );
   } catch (e) {
     console.log(e.message, e.stack);
     return new Response(JSON.stringify({ error: e?.message, stack: e?.stack }));
   }
 };
-
-dataRefresh();

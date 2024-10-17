@@ -34,7 +34,7 @@
   <p>{desc[number]}</p>
 {/if}
 
-<h2>{teachers}</h2>
+<h2 style="margin-top: 3rem">{teachers}</h2>
 {@html desc[teachers]}
 
 <style>
