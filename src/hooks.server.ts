@@ -1,7 +1,7 @@
 import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
-  dataRefresh();
+  await dataRefresh();
   const response = await resolve(event);
   return response;
 };
@@ -21,7 +21,6 @@ export const ownData = (email: string) => {
   return { data: registrationData[matchIndex].slice(4) };
 };
 
-const sheetName = "2024 form";
 const spreadsheetId = "1Hd_edu1c_6J_KkMzW3hrQpLKKVqPWKO-LMo6H9C8RgY";
 const dataRefresh = async () => {
   if (Date.now() - lastUpdate < 60 * 1000) {
@@ -43,13 +42,17 @@ const dataRefresh = async () => {
       "GS: token",
       auth?.email,
       "in (ms)",
-      Date.now() - startTimestamp
+      Date.now() - startTimestamp,
+      "getting email data"
     );
+
     const dataEmails = await getSpreadSheetValues({
       spreadsheetId,
-      sheetName: sheetName + "!A1:Z400",
+      sheetName: "2024 form!A1:Z400",
       auth,
     });
+
+    console.log("GS: email data in", (Date.now() - startTimestamp) / 1000, "s");
 
     const courseSheet = await getSpreadSheetValues({
       spreadsheetId,
@@ -58,11 +61,19 @@ const dataRefresh = async () => {
       auth,
     });
 
+    console.log(
+      "GS: course data in",
+      (Date.now() - startTimestamp) / 1000,
+      "s"
+    );
+
     const partySheet = await getSpreadSheetValues({
       spreadsheetId,
       sheetName: `Program party!A2:E20`,
       auth,
     });
+
+    console.log("GS: party data in", (Date.now() - startTimestamp) / 1000, "s");
 
     const transposeArrays = (arr) => {
       return arr[0].map((col, i) => arr.map((row) => row[i]));
@@ -78,6 +89,7 @@ const dataRefresh = async () => {
       "s"
     );
   } catch (e) {
+    console.log("GS: catch block!!");
     console.log(e.message, e.stack);
     return new Response(JSON.stringify({ error: e?.message, stack: e?.stack }));
   }
