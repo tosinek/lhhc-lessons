@@ -7,15 +7,19 @@
 <div class="page-layout">
   <div class="nav-bg" />
   <div class="header">
-    LHHC 2024
-    <nav>
-      <a href="/schedule" class:active={$page.url.pathname === "/schedule"}>
-        Lessons
-      </a>
-      <a href="/{$emailStore ?? ''}" class:active={$page.params?.email}>
-        My Schedule
-      </a>
-    </nav>
+    <img src="/logo.png" alt="Logo" width="64" height="64" />
+
+    <div class="header-texts">
+      LHHC 2024
+      <nav>
+        <a href="/schedule" class:active={$page.url.pathname === "/schedule"}>
+          Lessons
+        </a>
+        <a href="/{$emailStore ?? ''}" class:active={$page.params?.email}>
+          My Schedule
+        </a>
+      </nav>
+    </div>
   </div>
   <div class="content">
     <slot />
@@ -42,14 +46,20 @@
     grid-row: 1 / 2;
     background-color: var(--brand-color);
   }
-  .header {
-    grid-column: 2 / 3;
-    grid-row: 1 /2;
+  .header-texts {
     padding-inline: clamp(0rem, 3vw, 1rem);
     padding-block: 1rem;
     font-size: 2rem;
     text-align: center;
     color: white;
+  }
+  .header {
+    grid-column: 2 / 3;
+    grid-row: 1 /2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .content {
     padding-inline: clamp(1rem, 3vw, 0rem);
@@ -61,8 +71,8 @@
   @media (max-width: 400px) {
     .header,
     .content {
-      padding: 1rem;
-      padding: 1rem;
+      padding: 0 1rem;
+      padding: 0 1rem;
     }
     .page-layout {
       grid-template-columns: 1fr;
