@@ -1,12 +1,8 @@
-import {
-  courseData as courseCapacity,
-  ownData,
-  partyData,
-} from "../hooks.server";
+import { ownData, getData } from "./getExcelData";
 import type { LayoutServerLoad } from "./$types";
 import { allCourses } from "./[email]/courses";
 
-const coursesWithCapacity = (registrationData) => {
+const coursesWithCapacity = (registrationData, courseCapacity) => {
   const coursesCopy = allCourses.map((obj) => ({ ...obj }));
   return coursesCopy.map((course) => {
     const re = new RegExp(course.number, "i");
@@ -56,18 +52,30 @@ const coursesWithCapacity = (registrationData) => {
 };
 
 export const load: LayoutServerLoad = async ({ url, params }) => {
-  const personalRegistration = params?.email && ownData(params.email);
-  if (params?.email) console.log("email", params.email);
+  try {
+    const { registrationData, courseData, partyData } = await getData();
 
-  if (personalRegistration?.error) {
+    if (params?.email) console.log("email", params.email);
+    const personalRegistration =
+      params?.email && ownData(params.email, registrationData);
+
+    if (personalRegistration?.error) {
+      return {
+        error: personalRegistration.error,
+      };
+    }
+
     return {
-      error: personalRegistration.error,
+      parties: partyData,
+      courses: coursesWithCapacity(personalRegistration?.data, courseData),
+      registration: params?.email
+        ? ownData(params.email, registrationData)
+        : null,
+    };
+  } catch (e) {
+    console.log(e.message, e.stack);
+    return {
+      error: e.message,
     };
   }
-
-  return {
-    parties: partyData,
-    courses: coursesWithCapacity(personalRegistration?.data),
-    registration: params?.email ? ownData(params.email) : null,
-  };
 };
