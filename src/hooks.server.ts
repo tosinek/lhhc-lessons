@@ -1,10 +1,19 @@
 import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
+  console.log("running server side route:", {
+    href: event.url?.href,
+    sp: event.url?.searchParams,
+    rdSize: registrationData?.length,
+  });
   dataRefresh(); // tady bych necekal (await) protoze to brzdi a pro vetsinu lidi budou fresh data
   const response = await resolve(event);
   return response;
 };
+
+setInterval(() => {
+  console.log("GS: size:", registrationData?.length);
+}, 1000 * 60 * 2);
 
 import {
   getAuthToken,

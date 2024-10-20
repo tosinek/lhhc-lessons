@@ -1,11 +1,15 @@
 <script lang="ts">
   let email = "";
   const redirect = () => {
-    if (typeof window !== "undefined") window.location = "/" + email;
+    if (typeof window !== "undefined" && email) window.location = "/" + email;
+  };
+  const handleEnter = (e) => {
+    console.log("🚀 ~ handleEnter ~ e:", e);
+    if (e.key === "Enter") redirect();
   };
 </script>
 
-<form>
+<div class="form">
   <label for="email"> Registration email </label>
   <!-- svelte-ignore a11y-autofocus -->
   <input
@@ -15,12 +19,13 @@
     bind:value={email}
     placeholder="@"
     autofocus
+    on:keypress={handleEnter}
   />
-  <button on:click={redirect}>Show my lessons</button>
-</form>
+  <button type="submit" on:click={redirect}>Show my lessons</button>
+</div>
 
 <style>
-  form {
+  .form {
     display: grid;
     gap: 10px;
     justify-items: center;
