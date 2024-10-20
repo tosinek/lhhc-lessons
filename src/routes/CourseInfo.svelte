@@ -1,13 +1,10 @@
 <script lang="ts">
   import { desc } from "./[email]/courses";
-  export let name;
   export let number;
   export let teachers;
   export let parties;
-  console.log("🚀 ~ parties:", parties);
 </script>
 
-<!-- <h2>{name}</h2> -->
 {#if number === "Friday party"}
   <strong> Program: </strong>
   <div class="grid">

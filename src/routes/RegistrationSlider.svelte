@@ -5,6 +5,12 @@
   export let registeredAs: "follow" | "leader" | undefined = undefined;
 </script>
 
+{#if registeredAs}
+  <div class="registered {registeredAs === 'leader' ? 'leader' : 'follower'}">
+    You
+    {registeredAs === "leader" ? "lead" : "follow"}
+  </div>
+{/if}
 <div class="bar">
   <div class="slider">
     <div
@@ -12,20 +18,18 @@
       class:booked={leaders === "L sold out"}
       class:last={leaders === "L last spots"}
     >
-      {#if registeredAs === "leader"}
-        <input type="checkbox" name="" id="" checked />
-      {/if}
-
-      Leaders
-      <strong>
-        {#if leaders === "L sold out"}
-          SOLD OUT
-        {:else if leaders === "L last spots"}
-          LAST SPOTS
-        {:else}
-          OPEN
-        {/if}
-      </strong>
+      <span>
+        Leaders
+        <strong>
+          {#if leaders === "L sold out"}
+            SOLD OUT
+          {:else if leaders === "L last spots"}
+            LAST SPOTS
+          {:else}
+            OPEN
+          {/if}
+        </strong>
+      </span>
     </div>
 
     <div
@@ -33,29 +37,35 @@
       class:booked={follows === "F sold out"}
       class:last={follows === "F last spots"}
     >
-      Followers
-      <strong>
-        {#if follows === "F sold out"}
-          SOLD OUT
-        {:else if follows === "F last spots"}
-          LAST SPOTS
-        {:else}
-          OPEN
-        {/if}
-      </strong>
-
-      {#if registeredAs === "follow"}
-        <input type="checkbox" name="" id="" checked />
-      {/if}
+      <span>
+        Followers
+        <strong>
+          {#if follows === "F sold out"}
+            SOLD OUT
+          {:else if follows === "F last spots"}
+            LAST SPOTS
+          {:else}
+            OPEN
+          {/if}
+        </strong>
+      </span>
     </div>
   </div>
 </div>
 
 <style>
-  input {
-    transform: scale(2);
-    margin-inline: 10px;
-    pointer-events: none;
+  .registered {
+    padding: 0.1rem 1rem;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .leader {
+    color: rgba(43, 144, 226, 1);
+  }
+  .follower {
+    text-align: right;
+    color: rgba(161, 39, 185, 1);
   }
   .bar {
     display: flex;
@@ -66,14 +76,15 @@
     display: flex;
     gap: 5px;
     width: 100%;
-    height: 20px;
     font-size: 0.8rem;
   }
   .slider-leaders {
     background-color: rgba(43, 144, 226, 0.479);
     width: 100%;
-    padding: 0px 1rem;
+    padding: 3px 1rem;
     color: rgb(240, 248, 255);
+    display: flex;
+    align-items: center;
   }
   .slider-leaders.last {
     background-color: rgba(43, 144, 226, 1);
@@ -81,9 +92,8 @@
   .slider-follows {
     width: 100%;
     background-color: rgba(161, 39, 185, 0.452);
-    /* border-radius: 0 5px 5px 0; */
     text-align: right;
-    padding: 0px 1rem;
+    padding: 3px 1rem;
     color: rgb(240, 248, 255);
   }
   .slider-follows.last {

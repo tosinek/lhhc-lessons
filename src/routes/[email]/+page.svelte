@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { allCourses } from "./courses";
   import type { PageData } from "./$types";
-  import CourseCard from "./CourseCard.svelte";
   import Schedule from "../Schedule.svelte";
   export let data: PageData;
   if (typeof window !== "undefined") {
@@ -17,7 +16,7 @@
   <title>Your schedule LHHC 2024</title>
 </svelte:head>
 
-<h1>Your schedule ({data?.email})</h1>
+<h1>Your schedule</h1>
 
 {#if data?.error}
   <div class="red">

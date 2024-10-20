@@ -7,6 +7,7 @@
 
 <form>
   <label for="email"> Registration email </label>
+  <!-- svelte-ignore a11y-autofocus -->
   <input
     id="email"
     name="email"

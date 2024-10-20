@@ -1,7 +1,7 @@
 import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
-  await dataRefresh();
+  dataRefresh(); // tady bych necekal (await) protoze to brzdi a pro vetsinu lidi budou fresh data
   const response = await resolve(event);
   return response;
 };
@@ -21,6 +21,10 @@ export const ownData = (email: string) => {
   return { data: registrationData[matchIndex].slice(4) };
 };
 
+const transposeArrays = (arr) => {
+  return arr[0].map((col, i) => arr.map((row) => row[i]));
+};
+
 const spreadsheetId = "1Hd_edu1c_6J_KkMzW3hrQpLKKVqPWKO-LMo6H9C8RgY";
 const dataRefresh = async () => {
   if (Date.now() - lastUpdate < 60 * 1000) {
@@ -35,49 +39,23 @@ const dataRefresh = async () => {
 
   try {
     const startTimestamp = Date.now();
-    console.log("GS: getting auth token");
-
     const auth = await getAuthToken();
-    console.log(
-      "GS: token",
-      auth?.email,
-      "in (ms)",
-      Date.now() - startTimestamp,
-      "getting email data"
-    );
-
     const dataEmails = await getSpreadSheetValues({
       spreadsheetId,
       sheetName: "2024 form!A1:Z400",
       auth,
     });
-
-    console.log("GS: email data in", (Date.now() - startTimestamp) / 1000, "s");
-
     const courseSheet = await getSpreadSheetValues({
       spreadsheetId,
       sheetName: `2024 přehled!B2:J28`, // nr. 1-25 a pak 2 party
       // sloupce 1-8:  name, leader, follows, total, diff, room, room nick, leader info, follow info
       auth,
     });
-
-    console.log(
-      "GS: course data in",
-      (Date.now() - startTimestamp) / 1000,
-      "s"
-    );
-
     const partySheet = await getSpreadSheetValues({
       spreadsheetId,
       sheetName: `Program party!A2:E20`,
       auth,
     });
-
-    console.log("GS: party data in", (Date.now() - startTimestamp) / 1000, "s");
-
-    const transposeArrays = (arr) => {
-      return arr[0].map((col, i) => arr.map((row) => row[i]));
-    };
 
     partyData = transposeArrays(partySheet.data?.values);
     registrationData = dataEmails.data?.values;

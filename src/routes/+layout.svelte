@@ -34,6 +34,7 @@
     grid-template-columns: 1fr minmax(auto, 1200px) 1fr;
     gap: 1rem 0;
     grid-template-rows: auto 1fr auto;
+    min-height: 100vh; /* make the footer stick to the bottom */
   }
 
   .nav-bg {

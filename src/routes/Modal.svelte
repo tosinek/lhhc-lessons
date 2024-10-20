@@ -26,7 +26,6 @@
 
         <button
           type="button"
-          autofocus
           class="btn btn-primary btn-sm"
           on:click={() => dialog.close()}
         >

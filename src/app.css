@@ -27,7 +27,7 @@ body {
   color: rgb(39, 39, 39);
 }
 
-button {
+button:not(.link) {
   font-size: 1rem;
   padding: 10px;
   border-radius: 5px;
@@ -38,13 +38,39 @@ button {
   cursor: pointer;
   transition: all 0.3s;
 }
-.btn-sm {
+
+button.link {
+  background-color: transparent;
+  /* color: var(--primary-color); */
+  /* font-weight: 500; */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s;
+}
+button.link:hover {
+  color: var(--brand-color);
+}
+button:not(.link):hover {
+  background-color: var(--brand-color);
+}
+.color-primary {
+  color: var(--brand-color);
+}
+button.secondary {
+  background-color: transparent;
+  color: var(--brand-color);
+  border: 1px solid var(--brand-color);
+}
+button.secondary:hover {
+  background-color: var(--brand-color);
+  color: white;
+}
+button.btn-sm {
   padding: 5px;
   font-size: 0.8rem;
   min-width: 1.5rem;
-}
-button:hover {
-  background-color: var(--brand-color);
 }
 
 .bold {
