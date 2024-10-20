@@ -150,17 +150,18 @@
   h1,
   h2 {
     color: var(--font-color, black);
+    margin-top: 1.2em;
+    margin-bottom: 0.3em;
   }
   h1 {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     margin-bottom: 0rem;
     font-size: 2rem;
   }
   h2 {
-    color: grey;
     font-size: 1.2rem;
-    margin-top: 0.7rem;
-    margin-bottom: -0.7rem;
+    margin-top: 1.7em;
+    /* margin-bottom: -0.7rem; */
   }
   .reg-slider {
     margin-bottom: 0;
@@ -219,8 +220,8 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     align-items: start;
-    margin-block: 1rem;
   }
+
   .course {
     background-color: rgb(253, 244, 244);
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
