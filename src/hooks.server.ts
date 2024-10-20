@@ -20,19 +20,20 @@ export const ownData = (email: string) => {
   if (matchIndex === -1) return { error: "No registration found" };
   return { data: registrationData[matchIndex].slice(4) };
 };
+export let registrationDataLength = 0;
 
 const transposeArrays = (arr) => {
   return arr[0].map((col, i) => arr.map((row) => row[i]));
 };
 
 const spreadsheetId = "1Hd_edu1c_6J_KkMzW3hrQpLKKVqPWKO-LMo6H9C8RgY";
-const dataRefresh = async () => {
-  if (Date.now() - lastUpdate < 60 * 1000) {
-    console.log(
-      "GS: data already refreshed",
-      (Date.now() - lastUpdate) / 1000,
-      "s ago"
-    );
+export const dataRefresh = async (bypassTimer: boolean = false) => {
+  if (!bypassTimer && Date.now() - lastUpdate < 60 * 1000) {
+    // console.log(
+    //   "GS: data already refreshed",
+    //   (Date.now() - lastUpdate) / 1000,
+    //   "s ago"
+    // );
     return;
   }
   lastUpdate = Date.now();
@@ -66,6 +67,8 @@ const dataRefresh = async () => {
       (Date.now() - startTimestamp) / 1000,
       "s"
     );
+
+    return { success: true, data: { registrations: registrationData?.length } };
   } catch (e) {
     console.log("GS: catch block!!");
     console.log(e.message, e.stack);
